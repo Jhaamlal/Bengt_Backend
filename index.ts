@@ -14,7 +14,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   const allowedOrigin = ["http://localhost:3000"]
   if (req.headers?.origin) {
     const origin = req.headers.origin
-    if (allowedOrigin.includes(origin)) {
+    if (allowedOrigin.includes(origin) || origin.endsWith(".ngrok.io")) {
       res.setHeader("Access-Control-Allow-Origin", origin)
     }
   }

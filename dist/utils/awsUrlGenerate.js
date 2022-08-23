@@ -16,8 +16,8 @@ const aws_sdk_1 = __importDefault(require("aws-sdk"));
 require("dotenv/config");
 const accessKeyId = process.env.AWS_S3_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_S3_SECRET_ACCESS_KEY;
-const region = "ap-south-1";
-const BUCKET_NAME = "ravi-test-buket";
+const region = process.env.S3_REGION;
+const BUCKET_NAME = process.env.BUCKET_NAME;
 const s3 = new aws_sdk_1.default.S3({
     region,
     accessKeyId,
@@ -43,7 +43,7 @@ const getMultipartPreSignedUrl = (req, res, next) => __awaiter(void 0, void 0, v
             partNumber: index + 1,
         };
     });
-    res.send({
+    return res.send({
         parts: partSignedUrlList,
     });
 });

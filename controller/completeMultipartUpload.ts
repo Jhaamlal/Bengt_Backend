@@ -5,8 +5,8 @@ const secretAccessKey = process.env.AWS_S3_SECRET_ACCESS_KEY
 import * as _ from "lodash"
 
 
-const region = "ap-south-1"
-const BUCKET_NAME = "ravi-test-buket"
+const region = process.env.S3_REGION
+const BUCKET_NAME = process.env.BUCKET_NAME
 
 const s3 = new AWS.S3({
   region,

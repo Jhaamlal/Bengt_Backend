@@ -1,0 +1,21 @@
+{
+    "ServiceProviderId": 12,
+    "ServiceTypeId": 4,
+    "ServiceId": 10,
+    "FamillyId": 4,
+    "ClaimAmount": "500",
+    "ClaimantName": "Arun Goyal",
+    "DiscountOffered": "5.00",
+    "ClaimDate": "01-08-2022",
+    "UserId": 77,
+    "ClaimDocument": [
+        {
+            "ClaimDocumentPath": "",
+            "DocumentExtension": ".jpg"
+        },
+        {
+            "ClaimDocumentPath": "",
+            "DocumentExtension": ".jpg"
+        }
+    ]
+}
