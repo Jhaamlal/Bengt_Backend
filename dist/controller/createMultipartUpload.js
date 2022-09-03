@@ -37,26 +37,9 @@ const multiPart = (req, res, next) => __awaiter(void 0, void 0, void 0, function
             // ACL: "public-read",
         };
         const multipartUpload = yield s3.createMultipartUpload(params).promise();
-        // return {
-        //   statusCode: 200,
-        //   headers: {
-        //     "Access-Control-Allow-Origin": "*",
-        //     "Access-Control-Allow-Credentials": true,
-        //   },
-        //   body: JSON.stringify({ uploadId: multipartUpload }),
-        // }
         return res.send({ uploadId: multipartUpload });
     }
     catch (err) {
-        console.log(err);
-        // return {
-        //   statusCode: 500,
-        //   headers: {
-        //     "Access-Control-Allow-Origin": "*",
-        //     "Access-Control-Allow-Credentials": true,
-        //   },
-        //   body: JSON.stringify({ error: err }),
-        // }
         return res.send({ error: err });
     }
 });

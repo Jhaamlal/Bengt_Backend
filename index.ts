@@ -1,6 +1,7 @@
 import "dotenv/config"
 import express, { Express, NextFunction, Request, Response } from "express"
 const app: Express = express()
+import cors from "cors"
 const port = process.env.PORT
 import awsRouter from "./router/uploadRouter"
 app.use(express.json())
@@ -11,7 +12,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   res.removeHeader("x-powered-by")
   res.shouldKeepAlive = false
 
-  const allowedOrigin = ["http://localhost:3000"]
+  const allowedOrigin = ["http://localhost:3000","http://localhost:3002"]
   if (req.headers?.origin) {
     const origin = req.headers.origin
     if (allowedOrigin.includes(origin) || origin.endsWith(".ngrok.io")) {

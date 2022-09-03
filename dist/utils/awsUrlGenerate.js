@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getSinglePartUploadUrl = void 0;
 const aws_sdk_1 = __importDefault(require("aws-sdk"));
 require("dotenv/config");
 const accessKeyId = process.env.AWS_S3_ACCESS_KEY_ID;
@@ -24,6 +25,18 @@ const s3 = new aws_sdk_1.default.S3({
     secretAccessKey,
     signatureVersion: "v4",
 });
+const getSinglePartUploadUrl = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { fileName, partNumber, uploadId } = req.query;
+    const singedUrl = yield s3.getSignedUrlPromise("uploadPart", {
+        Bucket: BUCKET_NAME,
+        Key: fileName,
+        UploadId: uploadId,
+        PartNumber: +partNumber,
+        // Expires: 300,
+    });
+    return res.status(200).json(singedUrl);
+});
+exports.getSinglePartUploadUrl = getSinglePartUploadUrl;
 const getMultipartPreSignedUrl = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { fileName, uploadId, partNumber, fileType } = req.body;
     const multipartParams = {

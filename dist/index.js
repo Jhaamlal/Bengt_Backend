@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     res.removeHeader("server");
     res.removeHeader("x-powered-by");
     res.shouldKeepAlive = false;
-    const allowedOrigin = ["http://localhost:3000"];
+    const allowedOrigin = ["http://localhost:3000", "http://localhost:3002"];
     if ((_a = req.headers) === null || _a === void 0 ? void 0 : _a.origin) {
         const origin = req.headers.origin;
         if (allowedOrigin.includes(origin) || origin.endsWith(".ngrok.io")) {

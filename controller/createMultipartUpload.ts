@@ -30,27 +30,10 @@ export const multiPart: RequestHandler<{}> = async (req, res, next) => {
       Expires: expires,
       // ACL: "public-read",
     }
+    
     const multipartUpload = await s3.createMultipartUpload(params).promise()
-
-    // return {
-    //   statusCode: 200,
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Access-Control-Allow-Credentials": true,
-    //   },
-    //   body: JSON.stringify({ uploadId: multipartUpload }),
-    // }
     return res.send({ uploadId: multipartUpload })
   } catch (err) {
-    console.log(err)
-    // return {
-    //   statusCode: 500,
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Access-Control-Allow-Credentials": true,
-    //   },
-    //   body: JSON.stringify({ error: err }),
-    // }
     return res.send({ error: err })
   }
 }

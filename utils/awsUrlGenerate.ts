@@ -14,6 +14,25 @@ const s3 = new AWS.S3({
   signatureVersion: "v4",
 })
 
+export const getSinglePartUploadUrl: RequestHandler<{}, {}, {}, {
+  fileName: string,
+  partNumber: number,
+  uploadId: string
+}> = async (req, res, next) => {
+
+  const { fileName, partNumber, uploadId } = req.query
+  
+  const singedUrl = await s3.getSignedUrlPromise("uploadPart", {
+    Bucket: BUCKET_NAME,
+    Key: fileName,
+    UploadId: uploadId,
+    PartNumber: +partNumber,
+    // Expires: 300,
+  })
+
+  return res.status(200).json(singedUrl)
+}
+
 const getMultipartPreSignedUrl: RequestHandler<{}> = async (req, res, next) => {
   const { fileName, uploadId, partNumber, fileType } = req.body
 
